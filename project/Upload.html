@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Upload with Credits</title>
+</head>
+<body>
+    <h1>Upload an Image</h1>
+
+    <form id="imageUploadForm" enctype="multipart/form-data">
+        <input type="file" id="imageInput" accept="image/*" required>
+        <input type="text" id="authorInput" placeholder="Author name" required>
+        <button type="button" onclick="uploadImage()">Upload</button>
+    </form>
+
+    <h2>Uploaded Images</h2>
+    <ul id="imageList"></ul>
+
+    <script>
+        function uploadImage() {
+            var imageInput = document.getElementById('imageInput');
+            var authorInput = document.getElementById('authorInput');
+            var imageList = document.getElementById('imageList');
+
+            // Get the uploaded file and author name
+            var file = imageInput.files[0];
+            var author = authorInput.value;
+
+            if (file && author) {
+                // Create an image element to display the uploaded image
+                var imageElement = document.createElement('img');
+                imageElement.src = URL.createObjectURL(file);
+                imageElement.alt = 'Uploaded Image';
+
+                // Create a list item to display image and author information
+                var listItem = document.createElement('li');
+                listItem.appendChild(imageElement);
+
+                var authorParagraph = document.createElement('p');
+                authorParagraph.textContent = 'Author: ' + author;
+                listItem.appendChild(authorParagraph);
+
+                // Append the list item to the image list
+                imageList.appendChild(listItem);
+
+                // Clear input fields
+                imageInput.value = '';
+                authorInput.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
